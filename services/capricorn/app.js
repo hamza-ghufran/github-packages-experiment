@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Setup api routes
 app.use('/', function (req, res, next) {
-  res.send(Constants.config.name);
+  res.send('Service name :' + Constants.config.name);
 });
 
 app.use(function (req, res, next) {
