@@ -14,5 +14,6 @@
     "express": "~4.17.0",
     "morgan": "~1.10.0",
     "winston": "~3.3.0"
-  }
+  },
+  "gitHead": "81cbf351ac006354bcb31a078a13acab0ca7f61e"
 }
