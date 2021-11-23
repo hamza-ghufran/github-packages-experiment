@@ -1,1 +1,3 @@
-#
+- Nx
+- Lerna
+- Bit
