@@ -2,6 +2,7 @@ const { transports, createLogger, format } = require('winston');
 
 const path = require('path');
 
+// test comment
 const options = {
   exitOnError: false,
   format: format.combine(
