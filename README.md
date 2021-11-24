@@ -56,3 +56,9 @@ create .npmrc
 ```
 
 add .npmrc in .gitignore
+
+- Leveraging the power of lerna
+
+after making changes in the packages:
+
+`lerna version --conventional-commits`
