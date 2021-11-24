@@ -50,7 +50,9 @@ To interact with the package repository API, GitHub requires you to create a Per
 
 create .npmrc 
 
+```
 //npm.pkg.github.com/:_authToken=TOKEN
 @hamza-ghufran:registry=https://npm.pkg.github.com
+```
 
 add .npmrc in .gitignore
