@@ -52,3 +52,4 @@ combined.log
 vpc.yaml
 deploy-vpc-ecs.sh
 deploy.sh
+.npmrc
