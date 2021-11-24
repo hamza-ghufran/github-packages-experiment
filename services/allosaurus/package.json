@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@hamza-ghufran/logger": "^1.0.2",
+    "@hamza-ghufran/packages": "^1.0.1",
     "body-parser": "~1.19.0",
     "morgan": "~1.10.0",
     "express": "~4.17.0"
