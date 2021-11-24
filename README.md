@@ -39,3 +39,18 @@ lerna success Bootstrapped 3 packages
 > `lerna add @mymonorepo/logger --scope=allosaurus`
 
 NOTE: service-name = allosaurus | bast | capricorn 
+
+# Lerna with Npm packages
+
+replace @hamza-ghufran with your GitHub username:
+
+`npm login --registry=https://npm.pkg.github.com --scope=@hamza-ghufran`
+
+To interact with the package repository API, GitHub requires you to create a Personal Access Token (PAT) which you will use in-lieu of your password. Make sure that the 'repo', 'write:packages', 'read:packages', and 'delete:packages' options are selected:
+
+create .npmrc 
+
+//npm.pkg.github.com/:_authToken=TOKEN
+@hamza-ghufran:registry=https://npm.pkg.github.com
+
+add .npmrc in .gitignore

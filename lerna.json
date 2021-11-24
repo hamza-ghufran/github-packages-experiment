@@ -3,5 +3,13 @@
     "packages/*",
     "services/*"
   ],
-  "version": "0.1.1"
+  "version": "0.1.1",
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "message": "chore(release): publish",
+      "registry": "https://npm.pkg.github.com",
+      "allowBranch": "master"
+    }
+  }
 }
