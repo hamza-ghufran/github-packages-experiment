@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/hamza-ghufran/repo-packages/compare/bast@1.1.0...bast@1.1.1) (2021-11-24)
+
+**Note:** Version bump only for package bast
+
+
+
+
+
 # 1.1.0 (2021-11-24)
 
 
