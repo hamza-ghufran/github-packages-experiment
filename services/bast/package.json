@@ -13,7 +13,6 @@
     "@hamza-ghufran/logger": "^1.0.1",
     "body-parser": "~1.19.0",
     "express": "~4.17.0",
-    "morgan": "~1.10.0",
-    "winston": "~3.3.0"
+    "morgan": "~1.10.0"
   }
 }
