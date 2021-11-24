@@ -1,6 +1,6 @@
 {
-  "name": "@repo-packages/logger",
-  "version": "1.0.0",
+  "name": "@hamza-ghufran/logger",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "dependencies": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hamza-ghufran/logger.git"
+    "url": "https://github.com/hamza-ghufran/repo-packages.git"
   },
   "author": "",
   "license": "ISC",
