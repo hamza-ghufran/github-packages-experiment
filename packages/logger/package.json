@@ -1,5 +1,5 @@
 {
-  "name": "@hamza-ghufran/logger",
+  "name": "logger",
   "version": "1.0.2",
   "description": "",
   "main": "index.js",
@@ -9,18 +9,5 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/hamza-ghufran/repo-packages.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hamza-ghufran/repo-packages/issues"
-  },
-  "homepage": "https://github.com/hamza-ghufran/repo-packages#readme",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@hamza-ghufran"
   }
 }
