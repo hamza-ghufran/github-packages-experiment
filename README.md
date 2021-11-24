@@ -62,3 +62,10 @@ add .npmrc in .gitignore
 after making changes in the packages:
 
 `lerna version --conventional-commits`
+
+We still haven’t published this new version <new version with format>. 
+To do it we’ll use another Lerna command: 
+`lerna publish` with the `from-git` argument. 
+This argument tells Lerna to decide which versions have to be published by looking at the Git tags, which are used as the source of trut
+
+`lerna publish from-git`
