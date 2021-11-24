@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hamza-ghufran/repo-packages/packages/logger.git"
+    "url": "https://github.com/hamza-ghufran/logger.git"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/hamza-ghufran/repo-packages#readme",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com/@hamza-ghufran"
   }
 }
