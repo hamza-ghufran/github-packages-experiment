@@ -21,7 +21,7 @@ jobs:
   #     - run: gulp test
 
 
-  
+
   publish-gpr:
     # needs: build
     runs-on: ubuntu-latest
@@ -39,9 +39,9 @@ jobs:
         id: check
         run: | 
           if git diff ./packages/package.json; then
-            echo "::set-output name=package_updated::true"
-          else
             echo "::set-output name=package_updated::false"
+          else
+            echo "::set-output name=package_updated::true"
           fi 
 
       # - name: Check version changes
