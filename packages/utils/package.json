@@ -1,0 +1,19 @@
+{
+  "name": "@hamza-ghufran/utils",
+  "version": "1.0.0",
+  "description": "utils",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamza-ghufran/repo-packages.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hamza-ghufran/repo-packages/issues"
+  },
+  "homepage": "https://github.com/hamza-ghufran/repo-packages#readme"
+}

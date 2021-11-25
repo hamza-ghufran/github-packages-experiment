@@ -5,7 +5,8 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-    types: [ closed ]
+    # types: [ closed ]
+
 
 jobs:
   publish-gpr:
@@ -13,7 +14,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -24,22 +25,37 @@ jobs:
         id: check
         run: | 
            git fetch
-           if ! git diff HEAD^ --quiet origin/master ./packages/package.json; then
-              echo "::set-output name=package_updated::true"
+           if ! git diff --quiet origin/master ./packages/utils/package.json; then
+              echo "::set-output name=utils_updated::true"
            else
-              echo "::set-output name=package_updated::false"
+              echo "::set-output name=utils_updated::false"
+           fi
+
+           if ! git diff --quiet origin/master ./packages/types/package.json; then
+              echo "::set-output name=types_updated::true"
+           else
+              echo "::set-output name=types_updated::false"
            fi
 
       - name: Set up Node.js for GPR
-        if: steps.check.outputs.package_updated == 'true'
+        if: 
+           steps.check.outputs.utils_updated == 'true' || 
+           steps.check.outputs.types_updated == 'true'
         uses: actions/setup-node@v1
         with:
           registry-url: "https://npm.pkg.github.com/"
           scope: "@hamza-ghufran"
  
-      - name: Publish package to <Org> github packages
-        if: steps.check.outputs.package_updated == 'true'
+      - name: Publish utils package to <Org> github packages
+        if: steps.check.outputs.utils_updated == 'true'
         run: npm publish
-        working-directory: ./packages
+        working-directory: ./packages/utils
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
+      - name: Publish types package to <Org> github packages
+        if: steps.check.outputs.types_updated == 'true'
+        run: npm publish
+        working-directory: ./packages/types
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
