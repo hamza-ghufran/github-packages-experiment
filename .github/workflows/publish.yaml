@@ -48,7 +48,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           registry-url: "https://npm.pkg.github.com/"
-          scope: "@haticahq"
+          scope: "@hamza-ghufran"
 
       - name: Publish package to GPR
         if: steps.check.outputs.changed == 'true'
