@@ -50,13 +50,13 @@ jobs:
       - name: Publish utils package to <Org> github packages
         if: steps.check.outputs.utils_updated == 'true'
         run: npm publish
-        working-directory: ./packages/utils/package.json
+        working-directory: ./packages/utils
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Publish types package to <Org> github packages
         if: steps.check.outputs.types_updated == 'true'
         run: npm publish
-        working-directory: ./packages/types/package.json
+        working-directory: ./packages/types
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
