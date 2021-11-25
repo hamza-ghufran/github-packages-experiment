@@ -34,9 +34,8 @@ jobs:
         run: 'echo "Version change found! \n"'
 
       - name: Log when unchanged
-        # run: | 
-          # echo ${{join(steps.check.outputs.package_updated, '\n')}}
         if: steps.check.outputs.package_updated == 'false'
+        run: 'echo "No version change"'  
 
       - name: Set up Node.js for GPR
         if: steps.check.outputs.package_updated == 'true'
