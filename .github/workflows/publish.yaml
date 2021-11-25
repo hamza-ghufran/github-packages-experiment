@@ -7,7 +7,7 @@ on:
     branches: [ master ]
     # types: [ closed ]
 
-    
+
 jobs:
   publish-gpr:
     runs-on: ubuntu-latest
@@ -38,11 +38,9 @@ jobs:
            fi
 
       - name: Set up Node.js for GPR
-        if: >- 
-          ${{
-           (steps.check.outputs.utils_updated == 'true' || 
-           steps.check.outputs.types_updated == 'true')
-          }}
+        if: >
+           steps.check.outputs.utils_updated == 'true' || 
+           steps.check.outputs.types_updated == 'true'
         uses: actions/setup-node@v1
         with:
           registry-url: "https://npm.pkg.github.com/"
