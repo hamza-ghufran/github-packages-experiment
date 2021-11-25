@@ -33,7 +33,7 @@ jobs:
 
   post-merge:
     runs-on: ubuntu-latest
-      needs: [publish-gpr]
+      needs: publish-gpr
       if: github.event.pull_request.merged == true
       steps:
          - name: Set up Node.js for GPR

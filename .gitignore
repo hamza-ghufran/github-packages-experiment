@@ -56,3 +56,4 @@ deploy.sh
 .npmrc
 
 .bash
+.vscode

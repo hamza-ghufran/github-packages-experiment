@@ -110,7 +110,7 @@
 	//   "editor.defaultFormatter": "esbenp.prettier-vscode"
 	// },
 	"diffEditor.renderSideBySide": false,
-	"workbench.activityBar.visible": false,
+	"workbench.activityBar.visible": true,
 	"breadcrumbs.enabled": false,
 	"breadcrumbs.showInterfaces": false,
 	"breadcrumbs.showFields": false,
