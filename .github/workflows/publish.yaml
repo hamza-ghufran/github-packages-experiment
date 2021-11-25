@@ -13,12 +13,17 @@ jobs:
       contents: read
       packages: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Check for org packages version changes
+      - uses: actions/setup-node@v1
+        working-directory: ./packages
+        with:
+          registry-url: "https://npm.pkg.github.com/"
+          scope: "@hamza-ghufran"
+
+      - name: Check for org package version changes
         id: check
         run: | 
            git fetch
@@ -30,12 +35,8 @@ jobs:
 
       - name: Publish package to <Org> github packages
         if: steps.check.outputs.package_updated == 'true'
-        uses: actions/setup-node@v1
         run: npm ci
         run: npm publish
         working-directory: ./packages
-        with:
-          registry-url: "https://npm.pkg.github.com/"
-          scope: "@hamza-ghufran"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
