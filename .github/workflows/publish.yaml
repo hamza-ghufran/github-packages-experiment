@@ -30,8 +30,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        with:
-          ref: test
 
       - name: Check version changes
         uses: EndBug/version-check@v1
