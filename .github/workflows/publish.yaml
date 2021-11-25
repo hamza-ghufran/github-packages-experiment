@@ -36,14 +36,14 @@ jobs:
               echo "::set-output name=types_updated::false"
            fi
 
-      - name: Set up Node.js for GPR
-        if: 
-           steps.check.outputs.utils_updated == 'true' || 
-           steps.check.outputs.types_updated == 'true'
-        uses: actions/setup-node@v1
-        with:
-          registry-url: "https://npm.pkg.github.com/"
-          scope: "@hamza-ghufran"
+      # - name: Set up Node.js for GPR
+      #   if: 
+      #      steps.check.outputs.utils_updated == 'true' || 
+      #      steps.check.outputs.types_updated == 'true'
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     registry-url: "https://npm.pkg.github.com/"
+      #     scope: "@hamza-ghufran"
  
       - name: Publish utils package to <Org> github packages
         if: steps.check.outputs.utils_updated == 'true'
