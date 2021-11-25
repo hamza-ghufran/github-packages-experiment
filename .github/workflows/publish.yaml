@@ -57,20 +57,20 @@ jobs:
         # if: steps.check.outputs.package_updated == true
         # run: 'echo "Version change found! \n"'
 
-      - name: Log when unchanged
-        if: steps.check.outputs.package_updated == false
-        run: 'echo "No version change"'  
+      # - name: Log when unchanged
+      #   if: steps.check.outputs.package_updated == false
+      #   run: 'echo "No version change"'  
 
-      - name: Set up Node.js for GPR
-        if: steps.check.outputs.package_updated == true
-        uses: actions/setup-node@v1
-        with:
-          registry-url: "https://npm.pkg.github.com/"
-          scope: "@hamza-ghufran"
+      # - name: Set up Node.js for GPR
+      #   if: steps.check.outputs.package_updated == true
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     registry-url: "https://npm.pkg.github.com/"
+      #     scope: "@hamza-ghufran"
 
-      - name: Publish package to GPR
-        if: steps.check.outputs.package_updated == true
-        run: npm publish
-        working-directory: ./packages
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      # - name: Publish package to GPR
+      #   if: steps.check.outputs.package_updated == true
+      #   run: npm publish
+      #   working-directory: ./packages
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
