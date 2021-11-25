@@ -41,7 +41,8 @@ jobs:
             echo "::set-output name=package_updated::true"
           else
             echo "::set-output name=package_updated::false"
-          fi 
+          fi
+          exit $result_code
 
       # - name: Check version changes
       #   uses: EndBug/version-check@v1
@@ -52,22 +53,22 @@ jobs:
       #     token: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Version update detected
-        if: steps.check.outputs.package_updated == 'true'
+        if: steps.check.outputs.package_updated == true
         run: 'echo "Version change found! \n"'
 
       - name: Log when unchanged
-        if: steps.check.outputs.package_updated == 'false'
+        if: steps.check.outputs.package_updated == false
         run: 'echo "No version change"'  
 
       - name: Set up Node.js for GPR
-        if: steps.check.outputs.package_updated == 'true'
+        if: steps.check.outputs.package_updated == true
         uses: actions/setup-node@v1
         with:
           registry-url: "https://npm.pkg.github.com/"
           scope: "@hamza-ghufran"
 
       - name: Publish package to GPR
-        if: steps.check.outputs.package_updated == 'true'
+        if: steps.check.outputs.package_updated == true
         run: npm publish
         working-directory: ./packages
         env:

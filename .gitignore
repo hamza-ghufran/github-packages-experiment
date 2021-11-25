@@ -54,3 +54,5 @@ deploy-vpc-ecs.sh
 deploy.sh
 
 .npmrc
+
+.bash
