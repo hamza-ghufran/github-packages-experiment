@@ -5,7 +5,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
+    types: [ closed ]
 
 jobs:
   publish-gpr:
@@ -13,13 +13,14 @@ jobs:
     permissions:
       contents: read
       packages: write
+    if: github.event.pull_request.merged == true    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: Check packages/package.json version changes
+      - name: Check org package version changes
         id: check
         run: | 
            git fetch
@@ -29,23 +30,15 @@ jobs:
               echo "::set-output name=package_updated::false"
            fi
 
-      - name: Version update detected
-        if: steps.check.outputs.package_updated == true
-        run: 'echo "Version change found! \n"'
-
-      - name: Log when unchanged
-        if: steps.check.outputs.package_updated == false
-        run: 'echo "No version change"'  
-
       - name: Set up Node.js for GPR
-        if: steps.check.outputs.package_updated == true
+        if: steps.check.outputs.package_updated == 'true'
         uses: actions/setup-node@v1
         with:
           registry-url: "https://npm.pkg.github.com/"
           scope: "@hamza-ghufran"
 
-      - name: Publish package to GPR
-        if: steps.check.outputs.package_updated == true
+      - name: Publish package to <Org> github packages
+        if: steps.check.outputs.package_updated == 'true'
         run: npm publish
         working-directory: ./packages
         env:
