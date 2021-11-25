@@ -42,7 +42,6 @@ jobs:
           else
             echo "::set-output name=package_updated::false"
           fi
-          exit $result_code
 
       # - name: Check version changes
       #   uses: EndBug/version-check@v1
