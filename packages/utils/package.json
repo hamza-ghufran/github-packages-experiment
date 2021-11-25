@@ -1,6 +1,6 @@
 {
   "name": "@hamza-ghufran/utils",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "utils",
   "main": "index.js",
   "scripts": {
