@@ -37,9 +37,9 @@ jobs:
         id: check
         run: | 
           if git diff ./packages/package.json; then
-            echo "::set-output package_updated::true\n"
+            echo "::set-output name=package_updated::true\n"
           else
-            echo "::set-output package_updated::false\n"
+            echo "::set-output name=package_updated::false\n"
           fi 
 
       # - name: Check version changes
