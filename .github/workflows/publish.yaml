@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-      
+    if: github.event.pull_request.merged == true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
