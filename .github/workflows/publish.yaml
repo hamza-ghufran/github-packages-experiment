@@ -38,7 +38,7 @@ jobs:
            fi
 
       - name: Set up Node.js for GPR
-        if: >
+        if: 
            steps.check.outputs.utils_updated == 'true' || 
            steps.check.outputs.types_updated == 'true'
         uses: actions/setup-node@v1
