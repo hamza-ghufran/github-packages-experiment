@@ -30,7 +30,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          ref: github-packages
+          ref: test
 
       - name: Check version changes
         uses: EndBug/version-check@v1
@@ -38,12 +38,16 @@ jobs:
         with: 
           file-name: ./packages/package.json
           token: ${{ secrets.NPM_AUTH_TOKEN }}
-          file-url: https://npm.pkg.github.com/@hamza-ghufran/repo-packages.git
-          static-checking: localIsNew
+          # file-url: https://npm.pkg.github.com/@hamza-ghufran/repo-packages.git
+          # static-checking: localIsNew
 
       - name: Version update detected
         if: steps.check.outputs.changed == 'true'
         run: 'echo "Version change found! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
+
+      - name: Log when unchanged
+        if: steps.check.outputs.changed == 'false'
+        run: 'echo "No version change :/"'  
 
       - name: Set up Node.js for GPR
         if: steps.check.outputs.changed == 'true'
