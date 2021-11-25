@@ -13,17 +13,12 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - uses: actions/setup-node@v1
-        working-directory: ./packages
-        with:
-          registry-url: "https://npm.pkg.github.com/"
-          scope: "@hamza-ghufran"
-
-      - name: Check for org package version changes
+      - name: Check org package version changes
         id: check
         run: | 
            git fetch
@@ -33,9 +28,15 @@ jobs:
               echo "::set-output name=package_updated::false"
            fi
 
+      - name: Set up Node.js for GPR
+        if: steps.check.outputs.package_updated == 'true'
+        uses: actions/setup-node@v1
+        with:
+          registry-url: "https://npm.pkg.github.com/"
+          scope: "@hamza-ghufran"
+
       - name: Publish package to <Org> github packages
         if: steps.check.outputs.package_updated == 'true'
-        run: npm ci
         run: npm publish
         working-directory: ./packages
         env:
