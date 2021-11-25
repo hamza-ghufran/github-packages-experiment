@@ -13,7 +13,6 @@ jobs:
     permissions:
       contents: read
       packages: write
-    if: github.event.pull_request.merged == true    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -38,7 +37,8 @@ jobs:
           scope: "@hamza-ghufran"
 
       - name: Publish package to <Org> github packages
-        if: steps.check.outputs.package_updated == 'true'
+        if: | 
+          (steps.check.outputs.package_updated == 'true' && github.event.pull_request.merged == true)
         run: npm publish
         working-directory: ./packages
         env:
