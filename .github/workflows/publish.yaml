@@ -30,34 +30,47 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 2
 
-      - name: Check version changes
-        uses: EndBug/version-check@v1
+      - name: Check packages/package.json version changes
         id: check
-        with: 
-          file-name: ./packages/package.json
-          token: ${{ secrets.NPM_AUTH_TOKEN }}
-          # file-url: https://npm.pkg.github.com/@hamza-ghufran/repo-packages.git
-          # static-checking: localIsNew
+        run: | 
+           if ! git diff --quiet origin/master ./packages/package.json; then
+              echo "::set-output name=package_updated::true"
+           else
+              echo "::set-output name=package_updated::false"
+           fi
+
+      # - name: Check version changes
+      #   uses: EndBug/version-check@v1
+      #   id: check
+      #   with: 
+      #     diff-search: true
+      #     file-name: ./packages/package.json
+      #     token: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Version update detected
-        if: steps.check.outputs.changed == 'true'
-        run: 'echo "Version change found! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
+        run: | 
+           echo "${{join(steps.check.outputs.*, '\n')}}"
+        # if: steps.check.outputs.package_updated == true
+        # run: 'echo "Version change found! \n"'
 
-      - name: Log when unchanged
-        if: steps.check.outputs.changed == 'false'
-        run: 'echo "No version change :/"'  
+      # - name: Log when unchanged
+      #   if: steps.check.outputs.package_updated == false
+      #   run: 'echo "No version change"'  
 
-      - name: Set up Node.js for GPR
-        if: steps.check.outputs.changed == 'true'
-        uses: actions/setup-node@v1
-        with:
-          registry-url: "https://npm.pkg.github.com/"
-          scope: "@hamza-ghufran"
+      # - name: Set up Node.js for GPR
+      #   if: steps.check.outputs.package_updated == true
+      #   uses: actions/setup-node@v1
+      #   with:
+      #     registry-url: "https://npm.pkg.github.com/"
+      #     scope: "@hamza-ghufran"
 
-      - name: Publish package to GPR
-        if: steps.check.outputs.changed == 'true'
-        run: npm publish
-        working-directory: ./packages
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+      # - name: Publish package to GPR
+      #   if: steps.check.outputs.package_updated == true
+      #   run: npm publish
+      #   working-directory: ./packages
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
