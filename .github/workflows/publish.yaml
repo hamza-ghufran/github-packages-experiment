@@ -37,8 +37,6 @@ jobs:
         with: 
           file-name: ./packages/package.json
           token: ${{ secrets.NPM_AUTH_TOKEN }}
-          # file-url: https://npm.pkg.github.com/@hamza-ghufran/repo-packages.git
-          # static-checking: localIsNew
 
       - name: Version update detected
         if: steps.check.outputs.changed == 'true'
