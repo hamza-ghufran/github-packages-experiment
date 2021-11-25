@@ -1,28 +1,51 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: Package Publish
+
 on:
   push:
     branches: [ test ]
   pull_request:
     branches: [ test ]
 
-name: Publish Package
 jobs:
-  release:
-    name: Publish Package
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      # Use this GitHub Action
-      - name: Check package version
-        uses: technote-space/package-version-check-action@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
         with:
-          COMMIT_DISABLED: 1
-          PACKAGE_DIR: './packages'
+          node-version: 14
+      - run: gulp ci
+      - run: gulp test
 
-      - name: Publish
-        run: |
-          npm config set //registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN
-          npm publish
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Check version changes
+        uses: EndBug/version-check@v1
+        working-directory: ./packages
+        id: check
+
+      - name: Version update detected
+        if: steps.check.outputs.changed == 'true'
+        run: 'echo "Version change found! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
+
+      - name: Set up Node.js for GPR
+        if: steps.check.outputs.changed == 'true'
+        uses: actions/setup-node@v1
+        with:
+          registry-url: "https://npm.pkg.github.com/"
+          scope: "@haticahq"
+
+      - name: Publish package to GPR
+        if: steps.check.outputs.changed == 'true'
+        working-directory: ./packages
+        run: npm publish
         env:
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
