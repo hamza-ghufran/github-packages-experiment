@@ -30,11 +30,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-          ref: master
+          ref: test
 
       - name: Check version changes
         uses: EndBug/version-check@v1
         id: check
+        with: 
+          file-name: ./packages/package.json
+          token: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Version update detected
         if: steps.check.outputs.changed == 'true'
