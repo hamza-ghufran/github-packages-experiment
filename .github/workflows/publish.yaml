@@ -10,18 +10,18 @@ on:
     branches: [ test ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 14
-      - run: gulp ci
-      - run: gulp test
+  # build:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v2
+  #       with:
+  #         node-version: 14
+  #     - run: npm ci
+  #     - run: gulp test
 
   publish-gpr:
-    needs: build
+    # needs: build
     runs-on: ubuntu-latest
     permissions:
       contents: read
