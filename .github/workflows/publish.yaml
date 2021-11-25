@@ -26,14 +26,10 @@ jobs:
            git fetch
            if ! git diff --quiet origin/master ./packages/utils/package.json; then
               echo "::set-output name=utils_updated::true"
-           else
-              echo "::set-output name=utils_updated::false"
            fi
 
            if ! git diff --quiet origin/master ./packages/types/package.json; then
               echo "::set-output name=types_updated::true"
-           else
-              echo "::set-output name=types_updated::false"
            fi
 
       - name: Set up Node.js for GPR
