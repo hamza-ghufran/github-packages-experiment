@@ -38,6 +38,7 @@ jobs:
         with: 
           file-name: ./packages/package.json
           token: ${{ secrets.NPM_AUTH_TOKEN }}
+          static-checking: localIsNew
 
       - name: Version update detected
         if: steps.check.outputs.changed == 'true'
