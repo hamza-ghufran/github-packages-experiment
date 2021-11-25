@@ -39,5 +39,8 @@ jobs:
         if: steps.check.outputs.package_updated == 'true'
         run: npm publish
         working-directory: ./packages
+        with:
+          registry-url: "https://npm.pkg.github.com/"
+          scope: "@hamza-ghufran"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
