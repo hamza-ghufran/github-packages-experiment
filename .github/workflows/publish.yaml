@@ -53,6 +53,8 @@ jobs:
       #     token: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Version update detected
+        run: | 
+           echo "${{join(steps.check.outputs.package_updated, '\n')}}"
         if: steps.check.outputs.package_updated == true
         run: 'echo "Version change found! \n"'
 
