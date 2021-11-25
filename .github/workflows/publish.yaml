@@ -56,7 +56,7 @@ jobs:
         run: | 
            echo "${{join(steps.check.outputs.package_updated, '\n')}}"
         if: steps.check.outputs.package_updated == true
-        run: 'echo "Version change found! \n"'
+        # run: 'echo "Version change found! \n"'
 
       - name: Log when unchanged
         if: steps.check.outputs.package_updated == false
