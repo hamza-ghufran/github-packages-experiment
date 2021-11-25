@@ -4,6 +4,8 @@ const app = require('./app');
 
 const log = Logger.logger;
 
+
+// test
 async function runServer() {
   try {
     const server = app.listen(app.get('port'), () => {
