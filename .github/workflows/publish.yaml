@@ -31,32 +31,42 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
 
-      - name: Check version changes
-        uses: EndBug/version-check@v1
+      - name: Check packages/package.json version changes
         id: check
-        with: 
-          diff-search: true
-          file-name: ./packages/package.json
-          token: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: | 
+          if git diff ./packages/package.json; then
+            echo "::set-output package_updated::true\n"
+          else
+            echo "::set-output package_updated::false\n"
+          fi 
+
+      # - name: Check version changes
+      #   uses: EndBug/version-check@v1
+      #   id: check
+      #   with: 
+      #     diff-search: true
+      #     file-name: ./packages/package.json
+      #     token: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: Version update detected
-        if: steps.check.outputs.changed == 'true'
-        run: 'echo "Version change found! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
+        if: steps.check.outputs.package_updated == 'true'
+        run: 'echo "Version change found! \n"'
 
       - name: Log when unchanged
-        if: steps.check.outputs.changed == 'false'
+        if: steps.check.outputs.package_updated == 'false'
         run: 'echo "No version change :/"'  
 
       - name: Set up Node.js for GPR
-        if: steps.check.outputs.changed == 'true'
+        if: steps.check.outputs.package_updated == 'true'
         uses: actions/setup-node@v1
         with:
           registry-url: "https://npm.pkg.github.com/"
           scope: "@hamza-ghufran"
 
       - name: Publish package to GPR
-        if: steps.check.outputs.changed == 'true'
+        if: steps.check.outputs.package_updated == 'true'
         run: npm publish
         working-directory: ./packages
         env:
