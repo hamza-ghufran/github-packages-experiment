@@ -1,6 +1,6 @@
 {
   "name": "@hamza-ghufran/utils",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "utils",
   "main": "index.js",
   "scripts": {
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/hamza-ghufran/repo-packages/issues"
   },
-  "homepage": "https://github.com/hamza-ghufran/repo-packages#readme"
+  "homepage": "https://github.com/hamza-ghufran/repo-packages#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
 }
