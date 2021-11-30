@@ -1,6 +1,6 @@
 {
   "name": "@hamza-ghufran/utils",
-  "version": "1.0.6",
+  "version": "1.0.4",
   "description": "utils",
   "main": "index.js",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hamza-ghufran/repo-packages.git"
+    "url": "git+https://github.com/hamza-ghufran/github-packages-experiment.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hamza-ghufran/repo-packages/issues"
+    "url": "https://github.cd pa  com/hamza-ghufran/github-packages-experiment/issues"
   },
-  "homepage": "https://github.com/hamza-ghufran/repo-packages#readme",
+  "homepage": "https://github.com/hamza-ghufran/github-packages-experiment#readme",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   }
