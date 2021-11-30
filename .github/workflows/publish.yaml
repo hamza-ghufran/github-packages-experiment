@@ -31,7 +31,10 @@ jobs:
            if ! git diff --quiet origin/master ./packages/types/package.json; then
               echo "::set-output name=types_updated::true"
            fi
-
+      - run: npm install      
+        if: steps.check.outputs.utils_updated == 'true'
+        working-directory: ./packages/utils
+        
       - name: Set up Node.js for GPR
         if: 
            steps.check.outputs.utils_updated == 'true' || 
@@ -47,7 +50,11 @@ jobs:
         working-directory: ./packages/utils
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-
+          
+      - run: npm install      
+        if: steps.check.outputs.types_updated == 'true'
+        working-directory: ./packages/types    
+        
       - name: Publish types package to <Org> github packages
         if: steps.check.outputs.types_updated == 'true'
         run: npm publish

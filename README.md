@@ -1,3 +1,0 @@
-- Nx
-- Lerna
-- Bit
