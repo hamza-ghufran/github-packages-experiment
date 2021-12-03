@@ -19,17 +19,16 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 2
 
       - name: Check org package version changes
         id: check
         run: | 
-           git fetch
-           if ! git diff --quiet HEAD^ origin/master ./packages/utils/package.json; then
+           git fetch origin master:master
+           if ! git diff --quiet HEAD^ master ./packages/utils/package.json; then
               echo "::set-output name=utils_updated::true"
            fi
 
-           if ! git diff --quiet HEAD^ origin/master ./packages/types/package.json; then
+           if ! git diff --quiet HEAD^ master ./packages/types/package.json; then
               echo "::set-output name=types_updated::true"
            fi
       - run: npm install      
