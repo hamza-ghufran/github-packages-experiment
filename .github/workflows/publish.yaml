@@ -23,7 +23,7 @@ jobs:
       - name: Check org package version changes
         id: check
         run: | 
-           git fetch --depth=50
+           git fetch --depth=2
            if ! git diff --quiet HEAD^ origin/master ./packages/utils/package.json; then
               echo "::set-output name=utils_updated::true"
            fi
