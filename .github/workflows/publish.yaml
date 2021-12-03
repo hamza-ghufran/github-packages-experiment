@@ -5,7 +5,7 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-    types: [ closed ]
+    # types: [ closed ]
     
 jobs:
   publish-gpr:
@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: read
       packages: write
-    if: github.event.pull_request.merged == true
+    # if: github.event.pull_request.merged == true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -23,7 +23,7 @@ jobs:
       - name: Check org package version changes
         id: check
         run: | 
-           git fetch --depth=2
+           git fetch origin
            if ! git diff --quiet HEAD^ origin/master ./packages/utils/package.json; then
               echo "::set-output name=utils_updated::true"
            fi
