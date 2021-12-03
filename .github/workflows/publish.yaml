@@ -24,11 +24,11 @@ jobs:
         id: check
         run: | 
            git fetch
-           if ! git diff --quiet HEAD^ origin/master ./packages/utils/package.json; then
+           if ! git diff HEAD^ origin/master ./packages/utils/package.json; then
               echo "::set-output name=utils_updated::true"
            fi
 
-           if ! git diff --quiet HEAD^ origin/master ./packages/types/package.json; then
+           if ! git diff HEAD^ origin/master ./packages/types/package.json; then
               echo "::set-output name=types_updated::true"
            fi
       - run: npm install      
