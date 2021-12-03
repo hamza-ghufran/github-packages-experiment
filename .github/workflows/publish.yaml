@@ -23,12 +23,13 @@ jobs:
       - name: Check org package version changes
         id: check
         run: | 
+           git remote set-branches --add origin master 
            git fetch
-           if ! git diff HEAD^ origin/master ./packages/utils/package.json; then
+           if ! git diff --quiet HEAD^ origin/master ./packages/utils/package.json; then
               echo "::set-output name=utils_updated::true"
            fi
 
-           if ! git diff HEAD^ origin/master ./packages/types/package.json; then
+           if ! git diff --quiet HEAD^ origin/master ./packages/types/package.json; then
               echo "::set-output name=types_updated::true"
            fi
       - run: npm install      
