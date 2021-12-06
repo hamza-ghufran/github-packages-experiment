@@ -17,8 +17,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        fetch-depth: 2
-        # with:
+        with:
+          fetch-depth: 2
         #   ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Check org package version changes
