@@ -17,18 +17,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+        fetch-depth: 2
+        # with:
+        #   ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Check org package version changes
         id: check
         run: | 
-           git fetch --unshallow
-           if ! git diff --quiet HEAD^ origin/master ./packages/utils/package.json; then
+           if ! git diff --quiet HEAD^ -- ./packages/utils/package.json; then
               echo "::set-output name=utils_updated::true"
            fi
 
-           if ! git diff --quiet HEAD^ origin/master ./packages/types/package.json; then
+           if ! git diff --quiet HEAD^ -- ./packages/types/package.json; then
               echo "::set-output name=types_updated::true"
            fi
       - run: npm install      
